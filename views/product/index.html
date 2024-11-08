@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Product</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Stock</th>
+                <th>kategori</th>
+                <th>deskripsi</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{.categories}}
+            {{range .product}}
+            <tr>
+                <td>{{.Id}}</td>
+                <td>{{.Name}}</td>
+                <td>{{.Stock}}</td>
+                <td>{{.CategoryId}}</td>
+                <td>{{.Description}}</td>
+                <td>
+                    <a href="/categories/edit?id={{.Id}}">Edit</a>
+                    <a href="/categories/delete?id={{.Id}}">Delete</a>
+                </td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</body>
+</html>
