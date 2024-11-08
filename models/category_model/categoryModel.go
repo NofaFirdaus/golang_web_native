@@ -34,8 +34,21 @@ func Create(category entities.Category) bool {
 		panic(err)
 	}
 	return last > 0
+}
+
+func Update(category entities.Category) bool {
+	result, err := config.DB.Exec(`UPDATE categories SET name = ?, created_at = ? WHERE id = ?`, category.Name, category.UpdatedAt, category.Id)
+	if err != nil {
+		panic(err)
+	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		panic(err)
+	}
+	return rowsAffected > 0
 
 }
+
 func Show(id int) entities.Category {
 	result := config.DB.QueryRow(`SELECT id ,name FROM categories WHERE id =? `, id)
 	var category entities.Category
@@ -44,4 +57,18 @@ func Show(id int) entities.Category {
 		panic(err)
 	}
 	return category
+}
+
+func Delete(id int) bool {
+	result, err := config.DB.Exec(`DELETE FROM categories WHERE id = ?`, id)
+
+	if err != nil {
+		panic(err)
+	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		panic(err)
+	}
+
+	return rowsAffected > 0
 }
