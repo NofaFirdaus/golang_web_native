@@ -122,3 +122,17 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/product", http.StatusSeeOther)
 	}
 }
+func Delete(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "GET" {
+		idString := r.URL.Query().Get("id")
+		id, err := strconv.Atoi(idString)
+		if err != nil {
+			panic(err)
+		}
+		if product := productmodel.Delete(id); !product {
+			http.Redirect(w, r, "/product", http.StatusSeeOther)
+		}
+		http.Redirect(w, r, "/product", http.StatusSeeOther)
+
+	}
+}

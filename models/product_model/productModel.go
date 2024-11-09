@@ -57,3 +57,17 @@ func Show(id int) entities.Product {
 	}
 	return product
 }
+
+func Delete(id int) bool {
+	result, err := config.DB.Exec(`DELETE FROM products WHERE id = ?`, id)
+
+	if err != nil {
+		panic(err)
+	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		panic(err)
+	}
+
+	return rowsAffected > 0
+}
