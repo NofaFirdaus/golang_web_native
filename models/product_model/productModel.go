@@ -17,7 +17,6 @@ func GetAll() []entities.Product {
 		if err := rows.Scan(&product.Id, &product.Name, &product.CategoryId, &product.Stock, &product.Description, &product.CreatedAt, &product.UpdatedAt); err != nil {
 			panic(err)
 		}
-
 		products = append(products, product)
 	}
 	return products
@@ -34,4 +33,27 @@ func Create(product entities.Product) bool {
 		panic(err)
 	}
 	return last > 0
+}
+
+func Update(product entities.Product) bool {
+	result, err := config.DB.Exec(`UPDATE products SET name = ?, category_id = ?,stock = ?,description = ?, updated_at = ? WHERE id = ?`, product.Name, product.CategoryId, product.Stock, product.Description, product.UpdatedAt, product.Id)
+	if err != nil {
+		panic(err)
+	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		panic(err)
+	}
+	return rowsAffected > 0
+
+}
+
+func Show(id int) entities.Product {
+	result := config.DB.QueryRow(`SELECT id, name, category_id, stock, description FROM products WHERE id = ?`, id)
+	var product entities.Product
+
+	if err := result.Scan(&product.Id, &product.Name, &product.CategoryId, &product.Stock, &product.Description); err != nil {
+		panic(err)
+	}
+	return product
 }

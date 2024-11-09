@@ -19,6 +19,7 @@ func main() {
 	//product
 	http.HandleFunc("/product", productcontroller.Index)
 	http.HandleFunc("/product/add", productcontroller.Add)
+	http.HandleFunc("/product/edit", productcontroller.Edit)
 	serve := ":8000"
 	log.Printf("serve running : http://localhost%s \n", serve)
 	http.ListenAndServe(serve, nil)

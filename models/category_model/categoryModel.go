@@ -37,7 +37,7 @@ func Create(category entities.Category) bool {
 }
 
 func Update(category entities.Category) bool {
-	result, err := config.DB.Exec(`UPDATE categories SET name = ?, created_at = ? WHERE id = ?`, category.Name, category.UpdatedAt, category.Id)
+	result, err := config.DB.Exec(`UPDATE categories SET name = ?, updated_at = ? WHERE id = ?`, category.Name, category.UpdatedAt, category.Id)
 	if err != nil {
 		panic(err)
 	}

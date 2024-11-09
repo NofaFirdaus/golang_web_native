@@ -19,7 +19,6 @@
             </tr>
         </thead>
         <tbody>
-            {{.categories}}
             {{range .product}}
             <tr>
                 <td>{{.Id}}</td>
@@ -28,8 +27,8 @@
                 <td>{{.CategoryId}}</td>
                 <td>{{.Description}}</td>
                 <td>
-                    <a href="/categories/edit?id={{.Id}}">Edit</a>
-                    <a href="/categories/delete?id={{.Id}}">Delete</a>
+                    <a href="/product/edit?id={{.Id}}">Edit</a>
+                    <a href="/product/delete?id={{.Id}}">Delete</a>
                 </td>
             </tr>
             {{end}}
