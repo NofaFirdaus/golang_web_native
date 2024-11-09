@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1>Add product</h1>
-    <form action="" method="post">
+    <form action="/product/add" method="post">
       <div>
         <label for="name">Name</label>
         <input type="text" name="name" id="name" />
@@ -19,7 +19,7 @@
       <select name="category_id" id="category_id">
         {{range .categories}}
         <option value="{{.Id}}">{{.Name}}</option>
-        {{end}}    
+        {{end}}
       </select>
       <div>
         <label for="Description">Description</label>
